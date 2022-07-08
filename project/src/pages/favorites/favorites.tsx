@@ -1,8 +1,8 @@
 import React from 'react';
-import Icons from '../icons/icons';
-import PlaceCardFavorites from "../place-card-favorites/place-card-favorites";
+import Icons from '../../components/icons/icons';
+import PlaceCardFavorites from "../../components/place-card-favorites/place-card-favorites";
 
-function PageFavorites(): JSX.Element {
+function Favorites(): JSX.Element {
   return (
     <React.Fragment>
       <Icons/>
@@ -82,4 +82,4 @@ function PageFavorites(): JSX.Element {
   );
 }
 
-export default PageFavorites;
+export default Favorites;

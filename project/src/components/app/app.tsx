@@ -1,4 +1,4 @@
-import PageMain from '../page-main/page-main';
+import PageMain from '../../pages/main/main';
 
 type AppProps = {
   rentOffersCount: number;
