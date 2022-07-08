@@ -1,13 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import App from './components/app/app';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
-);
+const Setting = {
+  RENT_OFFERS_COUNT: 312,
+};
 
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App
+      rentOffersCount = {Setting.RENT_OFFERS_COUNT}
+    />
   </React.StrictMode>,
-);
+  document.getElementById('root'));
