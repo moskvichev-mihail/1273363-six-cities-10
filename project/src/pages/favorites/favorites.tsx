@@ -1,6 +1,6 @@
 import React from 'react';
 import Icons from '../../components/icons/icons';
-import PlaceCardFavorites from "../../components/place-card-favorites/place-card-favorites";
+import PlaceCardFavorites from '../../components/place-card-favorites/place-card-favorites';
 
 function Favorites(): JSX.Element {
   return (
@@ -52,7 +52,6 @@ function Favorites(): JSX.Element {
                   </div>
                   <div className="favorites__places">
                     <PlaceCardFavorites/>
-
                     <PlaceCardFavorites/>
                   </div>
                 </li>
