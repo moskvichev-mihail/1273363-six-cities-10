@@ -6,11 +6,15 @@ import cn from 'classnames';
 
 type OfferCardProps = {
   offer: Offer;
-  onMouseEnterHandle: () => void;
+  setActiveOffer: (id: number) => void;
 }
 
 function OfferCard(props: OfferCardProps): JSX.Element {
-  const {offer, onMouseEnterHandle} = props;
+  const {offer, setActiveOffer} = props;
+
+  const handleMouseEnter = () => {
+    setActiveOffer(offer.id);
+  };
 
   const placeCardClassName = cn('place-card', {
     'cities__card': OfferType.City,
@@ -34,7 +38,7 @@ function OfferCard(props: OfferCardProps): JSX.Element {
     '110': OfferType.Favorite && !OfferType.City && !OfferType.NearPlace,
   });
   return (
-    <article className={`${placeCardClassName}`} onMouseEnter={onMouseEnterHandle}>
+    <article className={`${placeCardClassName}`} onMouseEnter={handleMouseEnter}>
       <div className="place-card__mark">
         {offer.isPremium && <span>Premium</span>}
       </div>

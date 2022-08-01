@@ -8,6 +8,7 @@ import OfferCardList from '../../components/offer-card-list/offer-card-list';
 import NotFound from '../../pages/not-found/not-found';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
+import Map from '../../components/map/map';
 
 type RoomProps = {
   offers: Offer[];
@@ -17,12 +18,13 @@ type RoomProps = {
 function Room(props: RoomProps): JSX.Element {
   const {offers, reviews} = props;
   const {id} = useParams<{ id: string; }>();
+  const propertyId = Number(id);
   const property = offers.find((offer: Offer) => offer.id === Number(id));
 
   if (!property) {
     return <NotFound/>;
   }
-  const {bedrooms, images, isPremium, title, rating, type, maxAdults, price, host, description} = property;
+  const {bedrooms, city, images, isPremium, title, rating, type, maxAdults, price, host, description} = property;
 
   return (
     <Fragment>
@@ -133,13 +135,13 @@ function Room(props: RoomProps): JSX.Element {
             </section>
           </div>
         </div>
-        <section className="property__map map"></section>
+        <Map activeOffer={propertyId} city={city} className="property__map" offers={offers}/>
       </section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            <OfferCardList offers={offers}/>
+            <OfferCardList offers={offers} setActiveOffer={() => false}/>
           </div>
         </section>
       </div>

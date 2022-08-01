@@ -17,3 +17,13 @@ export enum OfferType {
   Favorite = 'favorites',
   NearPlace = 'near-places'
 }
+
+export enum UrlMapMarker {
+  Default = './img/pin.svg',
+  Active = './img/pin-active.svg',
+}
+
+export enum MapMarker {
+  Width = 27,
+  Height = 39,
+}

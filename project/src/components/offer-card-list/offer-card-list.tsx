@@ -1,25 +1,19 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment} from 'react';
 import {Offer} from '../../types/offer';
 import OfferCard from '../../components/offer-card/offer-card';
 
 type OfferCardListProps = {
   offers: Offer[];
+  setActiveOffer: (id: number) => void;
 }
 
 function OfferCardList(props: OfferCardListProps): JSX.Element {
-  const {offers} = props;
-  const [firstOffer] = offers;
-  const [activeOffer, setActiveOffer] = useState(firstOffer.id);
-  const changeActiveOffer = (id: number) => {
-    if (activeOffer !== id) {
-      setActiveOffer(id);
-    }
-  };
+  const {offers, setActiveOffer} = props;
 
   return (
     <Fragment>
       {offers.map((offer) =>
-        <OfferCard key={offer.id} offer={offer} onMouseEnterHandle={() => changeActiveOffer(offer.id)}/>)}
+        <OfferCard key={offer.id} offer={offer} setActiveOffer={setActiveOffer}/>)}
     </Fragment>
   );
 }
