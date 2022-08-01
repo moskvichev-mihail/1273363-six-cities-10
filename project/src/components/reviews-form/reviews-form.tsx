@@ -4,10 +4,10 @@ function ReviewsForm(): JSX.Element {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
-  const isSubmitAvailable = rating >= 1 && rating <= 5 && comment.length >= 50 && comment.length <= 300;
+  const isSubmitFormAvailable = rating >= 1 && rating <= 5 && comment.length >= 50 && comment.length <= 300;
   const formSubmitHandle = (evt: { preventDefault: () => void; }) => {
     evt.preventDefault();
-    return isSubmitAvailable;
+    //тут будет вызов action
   };
   const ratingChangeHandle = ({target}: ChangeEvent<HTMLInputElement>) => setRating(Number(target.value));
   const commentChangeHandle = ({target}: ChangeEvent<HTMLTextAreaElement>) => setComment(target.value);
@@ -57,7 +57,7 @@ function ReviewsForm(): JSX.Element {
           To submit review please make sure to set <span className="reviews__star">rating</span> and
           describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!isSubmitFormAvailable}>Submit</button>
       </div>
     </form>
   );

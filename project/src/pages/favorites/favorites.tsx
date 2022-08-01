@@ -3,11 +3,10 @@ import {Offer} from '../../types/offer';
 
 type FavoritesProps = {
   offers: Offer[];
-  offerType: string;
 }
 
 function Favorites(props: FavoritesProps): JSX.Element {
-  const {offers, offerType} = props;
+  const {offers} = props;
   return (
     <div className="page__favorites-container container">
       <section className="favorites">
@@ -22,7 +21,7 @@ function Favorites(props: FavoritesProps): JSX.Element {
               </div>
             </div>
             <div className="favorites__places">
-              <OfferCardList offers={offers} offerType={offerType}/>
+              <OfferCardList offers={offers}/>
             </div>
           </li>
           <li className="favorites__locations-items">
@@ -34,7 +33,7 @@ function Favorites(props: FavoritesProps): JSX.Element {
               </div>
             </div>
             <div className="favorites__places">
-              <OfferCardList offers={offers} offerType={offerType}/>
+              <OfferCardList offers={offers}/>
             </div>
           </li>
         </ul>

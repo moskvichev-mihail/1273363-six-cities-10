@@ -1,5 +1,5 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus, OfferType} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import Main from '../../pages/main/main';
@@ -21,11 +21,11 @@ function App({rentOffersCount, offers, reviews}: AppProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout/>}>
-          <Route index element={<Main rentOffersCount={rentOffersCount} offers={offers} offerType={OfferType.City}/>}/>
+          <Route index element={<Main rentOffersCount={rentOffersCount} offers={offers}/>}/>
           <Route path={AppRoute.Login} element={<Login/>}/>
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <Favorites offers={offers} offerType={OfferType.Favorite}/>
+              <Favorites offers={offers}/>
             </PrivateRoute>
           }
           />

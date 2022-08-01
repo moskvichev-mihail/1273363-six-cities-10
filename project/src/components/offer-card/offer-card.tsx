@@ -2,50 +2,48 @@ import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {MAX_RATING, OfferType} from '../../const';
 import {getPercent} from '../../utils';
+import cn from 'classnames';
 
 type OfferCardProps = {
   offer: Offer;
-  offerType: string,
   onMouseEnterHandle: () => void;
 }
 
 function OfferCard(props: OfferCardProps): JSX.Element {
-  const {offer, offerType, onMouseEnterHandle} = props;
+  const {offer, onMouseEnterHandle} = props;
 
-  let placeCardClassName = '';
-  let placeCardInfoClassName = '';
-  let placeCardImageWrapperClassName = '';
-  let placeCardImageWidth = '260';
-  let placeCardImageHeight = '200';
-
-  switch (offerType) {
-    case OfferType.City:
-      placeCardClassName = 'cities__card';
-      placeCardImageWrapperClassName = 'cities__image-wrapper';
-      break;
-    case OfferType.Favorite:
-      placeCardClassName = 'favorites__card';
-      placeCardInfoClassName = 'favorites__card-info';
-      placeCardImageWrapperClassName = 'favorites__image-wrapper';
-      placeCardImageWidth = '150';
-      placeCardImageHeight = '110';
-      break;
-    case OfferType.NearPlace:
-      placeCardClassName = 'near-places__card';
-      placeCardImageWrapperClassName = 'near-places__image-wrapper';
-      break;
-  }
+  const placeCardClassName = cn('place-card', {
+    'cities__card': OfferType.City,
+    'favorites__card': OfferType.Favorite && !OfferType.City,
+    'near-places__card': OfferType.NearPlace && !OfferType.Favorite && !OfferType.City,
+  });
+  const placeCardInfoClassName = cn('place-card__info', {
+    'favorites__card-info': OfferType.Favorite,
+  });
+  const placeCardImageWrapperClassName = cn('place-card__image-wrapper', {
+    'cities__image-wrapper': OfferType.City,
+    'favorites__image-wrapper': OfferType.Favorite && !OfferType.City,
+    'near-places__image-wrapper': OfferType.NearPlace && !OfferType.Favorite && !OfferType.City,
+  });
+  const placeCardImageWidth = cn({
+    '260': OfferType.City || OfferType.NearPlace,
+    '150': OfferType.Favorite && !OfferType.City && !OfferType.NearPlace,
+  });
+  const placeCardImageHeight = cn({
+    '200': OfferType.City || OfferType.NearPlace,
+    '110': OfferType.Favorite && !OfferType.City && !OfferType.NearPlace,
+  });
   return (
-    <article className={`${placeCardClassName} place-card`} onMouseEnter={onMouseEnterHandle}>
+    <article className={`${placeCardClassName}`} onMouseEnter={onMouseEnterHandle}>
       <div className="place-card__mark">
         {offer.isPremium && <span>Premium</span>}
       </div>
-      <div className={`${placeCardImageWrapperClassName} place-card__image-wrapper`}>
+      <div className={`${placeCardImageWrapperClassName}`}>
         <Link className="header__logo-link" to={`/offer/${offer.id}`}>
           <img className="place-card__image" src={offer.previewImage} width={placeCardImageWidth} height={placeCardImageHeight} alt="Place image" />
         </Link>
       </div>
-      <div className={`${placeCardInfoClassName} place-card__info`}>
+      <div className={`${placeCardInfoClassName}`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>

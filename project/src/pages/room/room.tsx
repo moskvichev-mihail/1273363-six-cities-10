@@ -1,6 +1,6 @@
 import {Fragment} from 'react';
 import {useParams} from 'react-router-dom';
-import {MAX_RATING, OfferType} from '../../const';
+import {MAX_RATING} from '../../const';
 import {getPercent} from '../../utils';
 import {Offer} from '../../types/offer';
 import {Review} from '../../types/review';
@@ -139,7 +139,7 @@ function Room(props: RoomProps): JSX.Element {
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            <OfferCardList offers={offers} offerType={OfferType.NearPlace}/>
+            <OfferCardList offers={offers}/>
           </div>
         </section>
       </div>
