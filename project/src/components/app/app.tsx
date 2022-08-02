@@ -1,5 +1,6 @@
+import React from 'react';
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus, OfferType} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import Main from '../../pages/main/main';
@@ -11,17 +12,16 @@ import {Offer} from '../../types/offer';
 import {Review} from '../../types/review';
 
 type AppProps = {
-  rentOffersCount: number;
   offers: Offer[];
   reviews: Review[];
 }
 
-function App({rentOffersCount, offers, reviews}: AppProps): JSX.Element {
+function App({offers, reviews}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout/>}>
-          <Route index element={<Main rentOffersCount={rentOffersCount} offers={offers}/>}/>
+          <Route index element={<Main offerType={OfferType.City}/>}/>
           <Route path={AppRoute.Login} element={<Login/>}/>
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>

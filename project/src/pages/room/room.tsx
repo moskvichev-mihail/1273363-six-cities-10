@@ -24,7 +24,7 @@ function Room(props: RoomProps): JSX.Element {
   if (!property) {
     return <NotFound/>;
   }
-  const {bedrooms, city, images, isPremium, title, rating, type, maxAdults, price, host, description} = property;
+  const {bedrooms, images, isPremium, title, rating, type, maxAdults, price, host, description} = property;
 
   return (
     <Fragment>
@@ -135,7 +135,7 @@ function Room(props: RoomProps): JSX.Element {
             </section>
           </div>
         </div>
-        <Map activeOffer={propertyId} city={city} className="property__map" offers={offers}/>
+        <Map activeOffer={propertyId} className="property__map" offers={offers}/>
       </section>
       <div className="container">
         <section className="near-places places">

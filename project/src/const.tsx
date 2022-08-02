@@ -1,5 +1,14 @@
 export const MAX_RATING = 5;
 
+export const cities = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];
+
 export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
@@ -16,6 +25,13 @@ export enum OfferType {
   City = 'cities',
   Favorite = 'favorites',
   NearPlace = 'near-places'
+}
+
+export enum SortType {
+  Default = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
 }
 
 export enum UrlMapMarker {
