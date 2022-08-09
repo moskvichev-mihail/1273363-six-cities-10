@@ -1,39 +1,48 @@
 import React from 'react';
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus, OfferType} from '../../const';
+import {Route, Routes} from 'react-router-dom';
+import {AppRoute, OfferCardType} from '../../const';
+import {useAppSelector} from '../../hooks';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {getServerAvailabilityStatus} from '../../store/app-data/selectors';
+import {isCheckedAuth} from '../../utils';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import Main from '../../pages/main/main';
+import Error from '../../pages/error/error';
+import Preloader from '../preloader/preloader';
 import NotFound from '../../pages/not-found/not-found';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Room from '../../pages/room/room';
-import {Offer} from '../../types/offer';
-import {Review} from '../../types/review';
 
-type AppProps = {
-  offers: Offer[];
-  reviews: Review[];
-}
+function App(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isServerAvailable = useAppSelector(getServerAvailabilityStatus);
 
-function App({offers, reviews}: AppProps): JSX.Element {
+  if (!isServerAvailable) {
+    return <Error/>;
+  }
+
+  if (isCheckedAuth(authorizationStatus)) {
+    return <Preloader/>;
+  }
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Layout/>}>
-          <Route index element={<Main offerType={OfferType.City}/>}/>
-          <Route path={AppRoute.Login} element={<Login/>}/>
-          <Route path={AppRoute.Favorites} element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <Favorites offers={offers}/>
+    <Routes>
+      <Route path={AppRoute.Root} element={<Layout/>}>
+        <Route index element={<Main offerCardType={OfferCardType.City}/>}/>
+        <Route path={AppRoute.Login} element={<Login/>}/>
+        <Route path={AppRoute.Favorites}
+          element={
+            <PrivateRoute authorizationStatus={authorizationStatus}>
+              <Favorites/>
             </PrivateRoute>
           }
-          />
-          <Route path={AppRoute.Room} element={<Room offers={offers} reviews={reviews}/>}/>
-          <Route path="*" element={<NotFound/>}/>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        />
+        <Route path={AppRoute.Room} element={<Room/>}/>
+        <Route path="*" element={<NotFound/>}/>
+      </Route>
+    </Routes>
   );
 }
 

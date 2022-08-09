@@ -1,20 +1,21 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {Offer} from '../../types/offer';
 import OfferCard from '../../components/offer-card/offer-card';
 
 type OfferCardListProps = {
-  offers: Offer[];
-  setActiveOffer: (id: number) => void;
+  offers: Offer[],
+  offerCardType: string,
+  onActiveOfferChange: (id: number) => void,
 }
 
 function OfferCardList(props: OfferCardListProps): JSX.Element {
-  const {offers, setActiveOffer} = props;
+  const {offers, offerCardType, onActiveOfferChange} = props;
 
   return (
-    <Fragment>
+    <>
       {offers.map((offer) =>
-        <OfferCard key={offer.id} offer={offer} setActiveOffer={setActiveOffer}/>)}
-    </Fragment>
+        <OfferCard key={offer.id} offer={offer} offerCardType={offerCardType} onActiveOfferChange={onActiveOfferChange}/>)}
+    </>
   );
 }
 
