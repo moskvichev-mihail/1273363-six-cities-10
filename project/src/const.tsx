@@ -1,4 +1,7 @@
+export const MIN_RATING = 1;
 export const MAX_RATING = 5;
+export const MIN_REVIEWS_TEXT = 50;
+export const MAX_REVIEWS_TEXT = 300;
 export const MAX_REVIEWS = 10;
 export const MAX_GALLERY = 6;
 
@@ -46,7 +49,7 @@ export enum OfferCardType {
 
 export const OfferType = new Map([
   ['apartment', 'Apartment'],
-  ['room', 'Private Room'],
+  ['room', 'Private room'],
   ['house', 'House'],
   ['hotel', 'Hotel'],
 ]);

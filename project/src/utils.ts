@@ -10,6 +10,8 @@ export const getDate = (dateString: string) => {
   return {dateTime: dateTime, dateText: dateText};
 };
 
+export const getRating = (rating: number): string => `${Math.round(rating) * 20}%`;
+
 export const getPercent = (partialValue: number, totalValue: number) => (100 * partialValue) / totalValue;
 
 export const filterOffers = (city: string, offers: Offer[]) => offers.filter((offer) => offer.city.name === city);

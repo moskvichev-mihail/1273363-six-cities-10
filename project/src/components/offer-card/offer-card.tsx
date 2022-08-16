@@ -1,8 +1,8 @@
 import {memo, MouseEvent, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
-import {AppRoute, MAX_RATING, OfferCardType} from '../../const';
-import {getOfferType, getPercent, isAuth} from '../../utils';
+import {AppRoute, OfferCardType} from '../../const';
+import {getOfferType, isAuth, getRating} from '../../utils';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {fetchFavoriteOffersAction, fetchOffersAction, setIsFavoriteAction} from '../../store/api-actions';
 import {setLoadedDataStatus} from '../../store/app-data/app-data';
@@ -19,6 +19,7 @@ type OfferCardProps = {
 function OfferCard(props: OfferCardProps): JSX.Element {
   const {offer, offerCardType, onActiveOfferChange} = props;
   const offerType = getOfferType(offer.type);
+  const offerRating = getRating(offer.rating);
 
   const [isFavorite, setIsFavorite] = useState(offer.isFavorite);
   const dispatch = useAppDispatch();
@@ -96,7 +97,7 @@ function OfferCard(props: OfferCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${getPercent(offer.rating, MAX_RATING)}%`}}></span>
+            <span style={{width: offerRating}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

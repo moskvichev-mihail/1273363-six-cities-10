@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sendReviewAction} from '../../store/api-actions';
 import {getReviewSendStatus} from '../../store/app-process/selectors';
 import {setReviewSendStatus} from '../../store/app-process/app-process';
-import {ReviewSendStatus} from '../../const';
+import {ReviewSendStatus, MIN_RATING, MAX_RATING, MIN_REVIEWS_TEXT, MAX_REVIEWS_TEXT} from '../../const';
 
 type ReviewsFormProps = {
   offerId: number,
@@ -16,7 +16,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
   const [isFormDisabled, setIsFormDisabled] = useState(false);
   const reviewSendStatus = useAppSelector(getReviewSendStatus);
 
-  const isSubmitFormAvailable = rating >= 1 && rating <= 5 && comment.length >= 50 && comment.length <= 300;
+  const isSubmitFormAvailable = rating >= MIN_RATING && rating <= MAX_RATING && comment.length >= MIN_REVIEWS_TEXT && comment.length <= MAX_REVIEWS_TEXT;
 
   const resetForm = () => {
     setRating(0);
