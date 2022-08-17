@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
 import {AppRoute, OfferCardType} from '../../const';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {getServerAvailabilityStatus} from '../../store/app-data/selectors';
 import {isCheckedAuth} from '../../utils';
@@ -14,8 +14,10 @@ import NotFound from '../../pages/not-found/not-found';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Room from '../../pages/room/room';
+import {fetchOffersAction} from '../../store/api-actions';
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isServerAvailable = useAppSelector(getServerAvailabilityStatus);
 
@@ -26,6 +28,8 @@ function App(): JSX.Element {
   if (isCheckedAuth(authorizationStatus)) {
     return <Preloader/>;
   }
+
+  dispatch(fetchOffersAction());
 
   return (
     <Routes>
